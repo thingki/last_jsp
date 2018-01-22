@@ -1,1 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+	<select id="selectMenu" parameterType="map" resultType="com.last.jsp.vo.UserInfo">
+		select * from user_info		
+	</select>
+	<select id="insertMenu"	resultType="map">
+		insert from menu(mNum, mName, mDesc, mUrl)
+		values(#{mNum}, #{mName}, #{mDesc}, #{mUrl})
+	</select>
+</mapper>

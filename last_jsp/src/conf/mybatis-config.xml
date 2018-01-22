@@ -2,18 +2,24 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<typeAliases>
+		<typeAlias type="com.last.jsp.vo.Customer" alias="customer" />
+		<typeAlias type="com.last.jsp.vo.UserInfo" alias="userinfo" />
+		<typeAlias type="com.last.jsp.vo.UserInfo" alias="userinfo" />
+		<typeAlias type="com.last.jsp.vo.UserInfo" alias="userinfo" />
+	</typeAliases>
 	<environments default="dev">
 		<environment id="dev">
-			<transactionManager type="jdbc"/>
+			<transactionManager type="jdbc" />
 			<dataSource type="POOLED">
-				<property name="url" value="jdbc:mariadb://localhost:3306/iot2"/>
-				<property name="driver" value="org.mariadb.jdbc.Driver"/>
-				<property name="username" value="root"/>
-				<property name="password" value="test"/>
+				<property name="url" value="jdbc:mariadb://localhost:3306/iot2" />
+				<property name="driver" value="org.mariadb.jdbc.Driver" />
+				<property name="username" value="root" />
+				<property name="password" value="test" />
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="sql/menu.xml"/>
+		<mapper resource="sql/menu.xml" />
 	</mappers>
 </configuration>
