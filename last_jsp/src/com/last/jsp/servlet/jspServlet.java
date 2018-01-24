@@ -9,32 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.last.jsp.service.ClassService;
-import com.last.jsp.service.CustomerService;
+import org.apache.jasper.servlet.JspServlet;
+import org.apache.log4j.Logger;
+
+import com.last.jsp.factory.ServiceFactory;
 import com.last.jsp.service.MenuService;
 import com.last.jsp.service.UserService;
-import com.last.jsp.service.impl.ClassServiceImpl;
-import com.last.jsp.service.impl.CustomerServiceImpl;
-import com.last.jsp.service.impl.MenuServiceImpl;
-import com.last.jsp.service.impl.UserServiceImpl;
-
+import com.last.jsp.util.URIParser;
 
 @WebServlet("/view/*")
 public class jspServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ServiceFactory sf = ServiceFactory.getInstance();
+	public static Logger log = Logger.getLogger(JspServlet.class);
 	
-	public String commendURI(String uri) {
-		if(uri.indexOf("list")!=-1){
-			return "list";
-		}else if(uri.indexOf("insert")!=-1){
-			return "insert";
-		}else if(uri.indexOf("upanddel")!=-1){
-			return "upanddel";
-		}else if(uri.indexOf("selectone")!=-1){
-			return "selectone";
-		}
-		return null;
-	}
     public jspServlet() {
         super();
     }
@@ -49,30 +37,38 @@ public class jspServlet extends HttpServlet {
 	
 	public void doProcess(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String uri=req.getRequestURI();
-		String root=req.getContextPath();
-		uri=uri.replace(root, "");
-		if(uri.indexOf("user")!=-1){
-			UserService ms = new UserServiceImpl();
-			System.out.println(commendURI(uri));
+		log.debug(uri);
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF"+uri+".jsp");
 		
-		}else if(uri.indexOf("class")!=-1){
-			ClassService ms = new ClassServiceImpl();
-			System.out.println(commendURI(uri));
+		if(req.getServletContext().getAttribute("menuList")==null) {
 			
-		}else if(uri.indexOf("menu")!=-1){
-			MenuService ms = new MenuServiceImpl();
-			System.out.println(commendURI(uri));
-			
-		}else if(uri.indexOf("customer")!=-1){
-			CustomerService ms = new CustomerServiceImpl();
-			System.out.println(commendURI(uri));
+			MenuService ms = (MenuService)sf.getService("menu");
+			ms.getMenuList(req);
 		}
 		
-		MenuService ms = new MenuServiceImpl();
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/view/index.jsp");
 		
-		ms.getMenuList(req);
+		String command = URIParser.getCommand(uri, 1);
+		log.debug(command);
+		if(command.equals("list")) {
+			uri = uri.replace("/"+command, "");
+			command = URIParser.getCommand(uri, 1);
+			if(command.equals("user")) {
+			UserService us = (UserService)sf.getService(command);
+			us.getUserList(req);
+			}
+		}
 		rd.forward(req, res);
 	}
-
 }
+
+
+
+
+
+
+//String command = URIParser.getCommand(new URIPattern(){
+//public String getCommand() {
+//	return "test";
+//}
+//});	
+//System.out.println(command);

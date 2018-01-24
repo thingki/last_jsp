@@ -10,7 +10,11 @@ public class MenuServiceImpl implements MenuService{
 	
 	@Override
 	public void getMenuList(HttpServletRequest req) {
-		req.setAttribute("menuList", mdao.selectMenu());
+		req.getServletContext().setAttribute("menuList", mdao.selectMenu()); //scope application에 넣는거		
 	}
-
+//page, session, appli
+	@Override
+	public void printClassName() {
+		
+	}
 }

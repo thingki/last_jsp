@@ -23,11 +23,11 @@ public class MenuDAOImpl implements MenuDAO {
 	}
 	
 	
-	public static void main(String[] args) {
-		MenuDAO mdao= new MenuDAOImpl();
-		List<Map<String, String>> list=mdao.selectMenu();
-		for(Map<String, String> m:list) {
-			log.info("test m=>"+ m);
-		}
-	}
+//	public static void main(String[] args) {
+//		MenuDAO mdao= new MenuDAOImpl();
+//		List<Map<String, String>> list=mdao.selectMenu();
+//		for(Map<String, String> m:list) {
+//			log.info("test m=>"+ m);
+//		}
+//	}
 }

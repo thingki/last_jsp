@@ -5,8 +5,8 @@
 	<typeAliases>
 		<typeAlias type="com.last.jsp.vo.Customer" alias="customer" />
 		<typeAlias type="com.last.jsp.vo.UserInfo" alias="userinfo" />
-		<typeAlias type="com.last.jsp.vo.UserInfo" alias="userinfo" />
-		<typeAlias type="com.last.jsp.vo.UserInfo" alias="userinfo" />
+		<typeAlias type="com.last.jsp.vo.UserInfo" alias="classinfo" />
+		<typeAlias type="com.last.jsp.vo.UserInfo" alias="customerinfo" />
 	</typeAliases>
 	<environments default="dev">
 		<environment id="dev">
@@ -21,5 +21,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="sql/menu.xml" />
+		<mapper resource="sql/user.xml" />
+		<mapper resource="sql/common.xml" />
 	</mappers>
 </configuration>

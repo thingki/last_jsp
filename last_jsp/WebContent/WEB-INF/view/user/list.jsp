@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<br>
+유저리스트<br>
+<c:forEach items="${userList}" var="ui">
+	${ui.uino},${ui.uiname}<br>
+</c:forEach>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.last.jsp.dao;
 
-public interface ClassDAO {
+import com.last.jsp.service.Service;
+
+public interface ClassDAO extends Service{
 
 }
